@@ -1,0 +1,45 @@
+.mainBody{
+    background: #D66D75;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #E29587, #D66D75);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #E29587, #D66D75); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.row>h1{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    font-size: 70px;
+    color: white;
+    
+}
+.column>h3{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    font-size: 30px;
+    color: white;
+}
+.tarefa{
+    border-bottom: 1px solid white;
+    width: 500px;
+}
+
+.mainContainer{
+    width: 500px;
+    margin: 100px auto;
+}
+
+#interna{
+    width: 500px;
+}
+form{
+    width: 100%;
+}
+
+form>input{
+    background-color: red;
+}
+
+.feito{
+    text-decoration: line-through;
+    color: white;
+    animation-duration: 2s;
+    animation-timing-function: ease-in-out;
+}

@@ -1,0 +1,21 @@
+{
+  "name": "lista_tarefas",
+  "version": "1.0.0",
+  "description": "Este projeto tem como objetivo desenvolver uma aplicação web como submissão para o desafio Todo List, desenvolvido para o processo seletivo da empresa Esparta",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "Gabriel Biesek Regis",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "confirm-dialog": "^0.1.2",
+    "dialogs": "^1.1.20",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "method-override": "^2.3.10",
+    "mongoose": "^4.13.5"
+  }
+}
