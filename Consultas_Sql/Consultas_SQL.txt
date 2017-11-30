@@ -1,0 +1,45 @@
+Consultas SQL - Submissão Esparta
+Gabriel Biesek Regis
+________________________________________________________________________________
+
+1)Buscar os nomes de todos os alunos que frequentam alguma turma do professor 'JOAO PEDRO'.
+
+SELECT Aluno.Nome FROM Aluno, Turma, Professor WHERE Turma.PROFESSOR_id = Professor.id AND Professor.nome = 'JOAO PEDRO' AND Turma.ALUNO_id = Aluno.id
+________________________________________________________________________________
+
+
+2)Buscar todos os alunos que frequentem aulas de 'MATEMATICA' e também 'FISICA'
+
+SELECT Aluno.nome FROM Aluno WHERE Aluno.id IN (SELECT Turma.ALUNO_id FROM Disciplina, Turma WHERE Turma.disciplina = Disciplina.id AND Disciplina.nome = 'MATEMATICA' OR Disciplina.nome = 'FISICA')
+________________________________________________________________________________
+
+3)Buscar as disciplinas que não tenham nenhuma turma.
+
+SELECT Disciplina.nome FROM Disciplina WHERE Disciplina.id NOT IN (SELECT Turma.DISCIPLINA_id FROM Turma)
+________________________________________________________________________________
+
+Buscar os alunos que frequentem aulas de 'MATEMATICA' exceto os que frequentem 'QUIMICA'.
+
+SELECT Aluno.nome FROM Aluno, Turma, Disciplina WHERE Aluno.id = Turma.ALUNO_id AND Turma.DISCIPLINA_id = Disciplina.id AND Disciplina.nome = 'MATEMATICA' AND Aluno.id NOT IN (SELECT Aluno.id FROM Aluno, Turma, Disciplina WHERE Aluno.id = Turma.ALUNO_id AND Turma.DISCIPLINA_id = Disciplina.id AND Disciplina.nome = 'QUIMICA')
+________________________________________________________________________________
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+________________________________________________________________________________
+
+
+Consideração sobre o modelo DER:
+Não sei se foi de propósito, mas notei um pequeno erro, ou até mesmo uma convenção no modelo DER.
+Uma turma, normalmente, é constituída por alunos, o problema é que dá a entender que uma turma pode ser constituída de no máximo um aluno com um específico ID.
+Sendo assim, irei considerar uma quarta tabela: Cursa(id_aluno, id_turma), onde ambas as chaves são primárias. Sendo id_aluno uma chave estrangeira para a 
+tabela Aluno e id_turma uma chave estrangeira para a tabela Turma. 
+Sendo assim, as consultas 1 e 4 ficariam
+
+1)Buscar os nomes de todos os alunos que frequentam alguma turma do professor 'JOAO PEDRO'.
+
+SELECT Aluno.nome FROM Aluno, Cursa, Turma, Professor WHERE Aluno.id = Cursa.id_aluno AND Turma.id = Cursa.id_turma AND Turma.PROFESSOR_id = Professor.id
+________________________________________________________________________________
+
+
+4)Buscar os alunos que frequentem aulas de 'MATEMATICA' exceto os que frequentem 'QUIMICA'.
+
+SELECT Aluno.nome FROM Aluno, Cursa, Turma, Disciplina WHERE Aluno.id = Cursa.id_aluno AND Turma.id = Cursa.id_turma AND Turma.DISCIPLINA_id = Disciplina.id AND Disciplina.nome = 'MATEMATICA' AND Aluno.id NOT IN(SELECT Aluno.id FROM Aluno, Cursa, Turma, Disciplina WHERE Aluno.id = Cursa.id_aluno AND Turma.id = Cursa.id_turma ANDTurma.DISCIPLINA_id = Disciplina.id AND Disciplina.nome = 'QUIMICA')
