@@ -5,43 +5,39 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,400" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
 	<title>Lista de tarefas</title>
 </head>
 <body class="mainBody">
-    <div class="mainContainer">
-        <div class="ui equal width center aligned padded grid" id="mainContainer">
-            <div class="row">
-                <h1>Lista de tarefas</h1>
-            </div>
-            <div class="row">
-                <form class="ui form inputNovo" action="/api" method="POST" enctype="application/x-www-form-urlencoded">
-                    <input class="inputNovo" type="text" name="descricao" placeholder="Digite uma nova tarefa">
+    <div class="main">
+        <div>
+            <h1>Lista de tarefas</h1>
+        </div>
+        <div class="mainContainer">
+            <div>
+                <form action="/api" method="POST" enctype="application/x-www-form-urlencoded">
+                        <input class="inputNovo" type="text" name="descricao" placeholder="Digite uma nova tarefa">
                 </form>
             </div>
+            
             <%tarefas.forEach(function(tarefa){%>
-                <div class="row tarefa">
-                    <div class="ui equal width center aligned padded grid">
-                        <div class="row">
-                            <div class="column" id="interna">
-                                <div class="column">
-                                    <h3><%=tarefa.descricao%></h3>
-                                </div>
-                            </div>
-                            <div class="column">
-                                <form action="/api/<%=tarefa._id%>/?_method=DELETE" method="POST" enctype="application/x-www-form-urlencoded">
-								<button class="ui white submit icon button small" onclick="return confirm('Tem certeza que deseja deletar esta tarefa?');">
-									<i class="icon trash"></i>
-								</button>
-							    </form>
-                            </div>
+                    <div class="tarefa">
+                        <div>
+                            <h3><%=tarefa.descricao%></h3>
+                        </div>
+                        <div class="deletar">
+                            <form action="/api/<%=tarefa._id%>/?_method=DELETE" method="POST" enctype="application/x-www-form-urlencoded">
+    							<button onclick="return confirm('Tem certeza que deseja deletar esta tarefa?');">
+    								<i class="icon trash"></i>
+    							</button>
+    					    </form>
                         </div>
                     </div>
-                </div>
-            <%})%>
+                <%})%>
         </div>
     </div>
+    
     
 <script type="text/javascript" src="app.js"></script>
 </body>
