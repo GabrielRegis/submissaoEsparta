@@ -23,15 +23,15 @@
             
             <%tarefas.forEach(function(tarefa){%>
                     <div class="tarefa">
-                        <div>
-                            <h3><%=tarefa.descricao%></h3>
-                        </div>
                         <div class="deletar">
                             <form action="/api/<%=tarefa._id%>/?_method=DELETE" method="POST" enctype="application/x-www-form-urlencoded">
     							<button onclick="return confirm('Tem certeza que deseja deletar esta tarefa?');">
     								<i class="icon trash"></i>
     							</button>
     					    </form>
+                        </div>
+                        <div>
+                            <h3><%=tarefa.descricao%></h3>
                         </div>
                     </div>
                 <%})%>
